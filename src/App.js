@@ -13,6 +13,7 @@ import { TodosError } from "./TodosError";
 import { EmptyTodos } from "./EmptyTodos";
 import "./styles/App.css"
 import TodoHeader from "./TodoHeader";
+import { ChangeAlert } from "./ChangeAlert";
 
 import "./styles/App.css"
 
@@ -29,7 +30,8 @@ function App() {
     completedTodos,
     searchValue,
     setSearchValue,
-    addTodo
+    addTodo,
+    sincronizeTodos,
   } = useTodos();
 
   return(
@@ -38,7 +40,8 @@ function App() {
   
       <img className="App-image" src={todo} alt="logo" />
     
-    <TodoHeader>
+    <TodoHeader loading={loading}//pasa loading a los dos hijos
+>
       <TodoCounter
         totalTodos={totalTodos}
         completedTodos={completedTodos}
@@ -48,24 +51,48 @@ function App() {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       /> 
-    </TodoHeader>
-    
-      <TodoList>
-        {error&& <TodosError error ={error}/>}
-        {loading && <TodosLoading/>}
-        {(!loading && !searchedTodos.length ) && <EmptyTodos/>}
-        {(!loading && searchedTodos.length<=0 ) && "No se encontro el Todo"}
-        {searchedTodos.map(todo=>(
-          <TodoItem 
-            key={todo.text} 
-            text={todo.text}
-            completed={todo.completed}
-            completeTodo={()=>completeTodo(todo.text)}
-            onDelete={()=>deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList> 
 
+    </TodoHeader>
+
+    <TodoList
+      error={error}
+      loading={loading}
+      searchedTodos={searchedTodos}
+      totalTodos={totalTodos}
+      searchText={searchValue}
+
+      onError={() => <TodosError />}
+      onLoading={() => <TodosLoading />}
+      onEmptyTodos={() => <EmptyTodos />}
+      onEmptySearchResults={
+        (searchText) => <p>No hay resultados para {searchText}</p>
+      }
+    >
+{/*        render={todo => (
+        <TodoItem 
+        key={todo.text} 
+        text={todo.text}
+        completed={todo.completed}
+        completeTodo={()=>completeTodo(todo.text)}
+        onDelete={()=>deleteTodo(todo.text)}
+        />
+
+      )} */} 
+
+      {todo => (
+        <TodoItem 
+        key={todo.text} 
+        text={todo.text}
+        completed={todo.completed}
+        completeTodo={()=>completeTodo(todo.text)}
+        onDelete={()=>deleteTodo(todo.text)}
+        />
+
+      )}
+
+    </TodoList>
+
+    
 
       {!!openModal&&(
             <Modal>
@@ -80,6 +107,9 @@ function App() {
       setOpenModal={setOpenModal} 
     />
     
+    <ChangeAlert
+      sincronize={sincronizeTodos}
+    />
     
     </>
 

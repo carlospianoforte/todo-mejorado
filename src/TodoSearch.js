@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/TodoSearch.css"
 
-function TodoSearch({searchValue, setSearchValue}){
+function TodoSearch({searchValue, setSearchValue, loading}){
 
 
     const onSearchValueChange =(event)=>{
@@ -13,11 +13,11 @@ function TodoSearch({searchValue, setSearchValue}){
     
     return(
         <input
-        className="TodoSearch" 
-        placeholder="cebolla"
-        value={searchValue}
-        onChange={onSearchValueChange}
-        
+            className="TodoSearch" 
+            placeholder="cebolla"
+            value={searchValue}
+            onChange={onSearchValueChange}
+            disabled={loading}
         />
    
     )
