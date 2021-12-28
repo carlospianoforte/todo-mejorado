@@ -26,3 +26,18 @@
   .TodoSearch:disabled {
     opacity: 25%;
   }
+
+  @media only screen and (max-width: 640px)
+{
+  .TodoSearch {
+
+    margin: 0 24px;
+    height: 2em;
+    width: calc(100% - 62px);
+    font-size: 1rem;
+    text-align: center;
+    font-family: 'Montserrat';
+/*     font-weight: 20rem;
+ */ 
+  }
+}

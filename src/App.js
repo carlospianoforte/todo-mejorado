@@ -16,6 +16,7 @@ import TodoHeader from "./TodoHeader";
 import { ChangeAlert } from "./ChangeAlert";
 
 import "./styles/App.css"
+import Footer from "./Footer";
 
 function App() {
   const {
@@ -37,82 +38,85 @@ function App() {
   return(
 
     <>
-  
-      <img className="App-image" src={todo} alt="logo" />
-    
-    <TodoHeader loading={loading}//pasa loading a los dos hijos
->
-      <TodoCounter
-        totalTodos={totalTodos}
-        completedTodos={completedTodos}
-      />
-      
-      <TodoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      /> 
+    <section className="App-todos">
 
-    </TodoHeader>
+      <section className="App-todos1">
+          
+          <img className="App-image" src={todo} alt="logo" />
+        
+        <TodoHeader loading={loading}>{/* //pasa loading a los dos hijos */}
+          <TodoCounter
+            totalTodos={totalTodos}
+            completedTodos={completedTodos}
+          />
+          
+          <TodoSearch
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          /> 
 
-    <TodoList
-      error={error}
-      loading={loading}
-      searchedTodos={searchedTodos}
-      totalTodos={totalTodos}
-      searchText={searchValue}
+        </TodoHeader>
 
-      onError={() => <TodosError />}
-      onLoading={() => <TodosLoading />}
-      onEmptyTodos={() => <EmptyTodos />}
-      onEmptySearchResults={
-        (searchText) => <p>No hay resultados para {searchText}</p>
-      }
-    >
-{/*        render={todo => (
-        <TodoItem 
-        key={todo.text} 
-        text={todo.text}
-        completed={todo.completed}
-        completeTodo={()=>completeTodo(todo.text)}
-        onDelete={()=>deleteTodo(todo.text)}
+        <TodoList
+          error={error}
+          loading={loading}
+          searchedTodos={searchedTodos}
+          totalTodos={totalTodos}
+          searchText={searchValue}
+
+          onError={() => <TodosError />}
+          onLoading={() => <TodosLoading />}
+          onEmptyTodos={() => <EmptyTodos />}
+          onEmptySearchResults={
+            (searchText) => <p>No hay resultados para {searchText}</p>
+          }
+        >
+
+          {todo => (
+            <TodoItem 
+            key={todo.text} 
+            text={todo.text}
+            completed={todo.completed}
+            completeTodo={()=>completeTodo(todo.text)}
+            onDelete={()=>deleteTodo(todo.text)}
+            />
+
+          )}
+
+        </TodoList>
+
+        
+
+          {!!openModal&&(
+                <Modal>
+                    <TodoForm
+                      addTodo={addTodo}
+                      setOpenModal={setOpenModal}
+                    />
+                </Modal>
+          )}
+
+        <CreateTodoButton
+          setOpenModal={setOpenModal} 
+        />
+        
+        <ChangeAlert
+          sincronize={sincronizeTodos}
         />
 
-      )} */} 
+            
 
-      {todo => (
-        <TodoItem 
-        key={todo.text} 
-        text={todo.text}
-        completed={todo.completed}
-        completeTodo={()=>completeTodo(todo.text)}
-        onDelete={()=>deleteTodo(todo.text)}
-        />
+      </section>
 
-      )}
 
-    </TodoList>
+        <Footer/>
 
-    
 
-      {!!openModal&&(
-            <Modal>
-                <TodoForm
-                  addTodo={addTodo}
-                  setOpenModal={setOpenModal}
-                />
-            </Modal>
-      )}
+    </section>
 
-    <CreateTodoButton
-      setOpenModal={setOpenModal} 
-    />
-    
-    <ChangeAlert
-      sincronize={sincronizeTodos}
-    />
-    
+
     </>
-
+  
 
   );
 }

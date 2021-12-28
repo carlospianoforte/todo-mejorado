@@ -9,6 +9,7 @@ const TodoHeader = ({children, loading}) => {//recive loading
                 .toArray(children)
                 .map(child => React.cloneElement(child, { loading }))//itera por cada elemnto del array
             }
+            
         </header>
     )
 }
