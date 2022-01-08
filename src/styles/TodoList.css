@@ -2,5 +2,30 @@ ul {
     margin: 0;
     padding: 0 0 56px 0;
     list-style: none;
+    overflow-y: scroll;
   }
 
+
+  .TodoList-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  @media only screen and (max-width: 640px)
+{
+  .TodoList-container{
+    
+    width: 250px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+
+  }

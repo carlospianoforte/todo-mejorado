@@ -109,10 +109,11 @@ function App() {
       </section>
 
 
-        <Footer/>
+      <Footer/>
 
 
     </section>
+
 
 
     </>

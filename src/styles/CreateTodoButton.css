@@ -6,7 +6,7 @@
     cursor: pointer;
     font-size: 50px;
 /*     position: fixed;
- */    bottom: 24px;
+ */ bottom: 24px;
     right: 24px;
     font-weight: bold;
     color: #FAFAFA;
@@ -19,9 +19,9 @@
   
     transform: rotate(0);
     transition: .3s ease;
-    z-index: 1;
+    z-index: 0;
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   
   .CreateTodoButton:hover {
@@ -35,7 +35,8 @@
       width: 35px;
       font-size: 35px;
       margin-top: 5px;
-      margin-bottom: 3px;
+      margin-bottom: 7px;
+      position: inherit;
 
     }
 
